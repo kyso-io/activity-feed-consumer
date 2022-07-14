@@ -29,7 +29,7 @@ WORKDIR /app
 COPY --chown=node:node --from=builder /app/*.json ./
 COPY --chown=node:node --from=builder /app/dist ./dist
 COPY --chown=node:node --from=builder /app/node_modules ./node_modules
-COPY --chown=node:node --from=builder /app/version.txt ./version.txt
+COPY --chown=node:node --from=builder /app/release.txt ./
 ## Disable next telemetry usage
 ENV NEXT_TELEMETRY_DISABLED 1
 ## Run the compiled version
