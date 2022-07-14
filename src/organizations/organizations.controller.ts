@@ -8,6 +8,7 @@ import {
     KysoOrganizationsDeleteEvent,
     KysoOrganizationsRemoveMemberEvent,
     KysoOrganizationsUpdateEvent,
+    KysoOrganizationsUpdateMemberRoleEvent,
 } from '@kyso-io/kyso-model'
 import { Controller } from '@nestjs/common'
 import { EventPattern } from '@nestjs/microservices'
@@ -58,6 +59,17 @@ export class OrganizationsController {
         activityFeed.entity_id = kysoOrganizationsAddMemberEvent.organization.id
         activityFeed.action = ActionEnum.ADD_MEMBER
         activityFeed.organization = kysoOrganizationsAddMemberEvent.organization.sluglified_name
+        this.databaseService.insertActivityFeed(activityFeed)
+    }
+
+    @EventPattern(KysoEvent.ORGANIZATIONS_UPDATE_MEMBER_ROLE)
+    async handleOrganizationsUpdateMemberRole(kysoOrganizationsUpdateMemberRoleEvent: KysoOrganizationsUpdateMemberRoleEvent) {
+        const activityFeed: ActivityFeed = new ActivityFeed()
+        activityFeed.user_id = kysoOrganizationsUpdateMemberRoleEvent.user.id
+        activityFeed.entity = EntityEnum.ORGANIZATION
+        activityFeed.entity_id = kysoOrganizationsUpdateMemberRoleEvent.organization.id
+        activityFeed.action = ActionEnum.UPDATE_MEMBER_ROLE
+        activityFeed.organization = kysoOrganizationsUpdateMemberRoleEvent.organization.sluglified_name
         this.databaseService.insertActivityFeed(activityFeed)
     }
 
