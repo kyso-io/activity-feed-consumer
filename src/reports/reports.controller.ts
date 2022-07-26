@@ -3,6 +3,7 @@ import {
     ActivityFeed,
     EntityEnum,
     KysoEvent,
+    KysoReportsAuthorEvent,
     KysoReportsCreateEvent,
     KysoReportsDeleteEvent,
     KysoReportsNewVersionEvent,
@@ -138,4 +139,15 @@ export class ReportsController {
         this.databaseService.insertActivityFeed(activityFeed)
     }
 
+    @EventPattern(KysoEvent.REPORTS_ADD_AUTHOR)
+    async handleReportsAddAuthor(kysoReportsAuthorEvent: KysoReportsAuthorEvent) {
+        const activityFeed: ActivityFeed = new ActivityFeed()
+        activityFeed.user_id = kysoReportsAuthorEvent.author.id
+        activityFeed.entity = EntityEnum.REPORT
+        activityFeed.entity_id = kysoReportsAuthorEvent.report.id
+        activityFeed.action = ActionEnum.ADD_AUTHOR
+        activityFeed.organization = kysoReportsAuthorEvent.organization.sluglified_name
+        activityFeed.team = kysoReportsAuthorEvent.team.sluglified_name
+        this.databaseService.insertActivityFeed(activityFeed)
+    }
 }
