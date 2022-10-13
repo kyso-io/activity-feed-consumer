@@ -1,4 +1,4 @@
-import { ActionEnum, ActivityFeed, EntityEnum, KysoCommentsCreateEvent, KysoCommentsDeleteEvent, KysoCommentsUpdateEvent, KysoEvent } from '@kyso-io/kyso-model'
+import { ActionEnum, ActivityFeed, EntityEnum, KysoCommentsCreateEvent, KysoCommentsDeleteEvent, KysoCommentsUpdateEvent, KysoEventEnum } from '@kyso-io/kyso-model'
 import { Controller } from '@nestjs/common'
 import { EventPattern } from '@nestjs/microservices'
 import { DatabaseService } from '../database/database.service'
@@ -7,7 +7,7 @@ import { DatabaseService } from '../database/database.service'
 export class CommentsController {
     constructor(private databaseService: DatabaseService) {}
 
-    @EventPattern(KysoEvent.COMMENTS_CREATE)
+    @EventPattern(KysoEventEnum.COMMENTS_CREATE)
     async handleCommentsCreated(kysoCommentsCreateEvent: KysoCommentsCreateEvent) {
         const activityFeed: ActivityFeed = new ActivityFeed()
         activityFeed.user_id = kysoCommentsCreateEvent.user.id
@@ -19,7 +19,7 @@ export class CommentsController {
         this.databaseService.insertActivityFeed(activityFeed)
     }
 
-    @EventPattern(KysoEvent.COMMENTS_UPDATE)
+    @EventPattern(KysoEventEnum.COMMENTS_UPDATE)
     async handleCommentsUpdated(kysoCommentsUpdateEvent: KysoCommentsUpdateEvent) {
         const activityFeed: ActivityFeed = new ActivityFeed()
         activityFeed.user_id = kysoCommentsUpdateEvent.user.id
@@ -31,7 +31,7 @@ export class CommentsController {
         this.databaseService.insertActivityFeed(activityFeed)
     }
 
-    @EventPattern(KysoEvent.COMMENTS_DELETE)
+    @EventPattern(KysoEventEnum.COMMENTS_DELETE)
     async handleCommentsDeleted(kysoCommentsDeleteEvent: KysoCommentsDeleteEvent) {
         const activityFeed: ActivityFeed = new ActivityFeed()
         activityFeed.user_id = kysoCommentsDeleteEvent.user.id

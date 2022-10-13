@@ -1,7 +1,7 @@
 import {
     ActionEnum,
     ActivityFeed,
-    KysoEvent,
+    KysoEventEnum,
     KysoUsersCreateEvent,
     KysoUsersDeleteEvent,
     KysoUsersRecoveryPasswordEvent,
@@ -17,7 +17,7 @@ import { DatabaseService } from '../database/database.service'
 export class UsersController {
     constructor(private databaseService: DatabaseService) {}
 
-    @EventPattern(KysoEvent.USERS_CREATE)
+    @EventPattern(KysoEventEnum.USERS_CREATE)
     async handleUsersCreated(kysoUsersCreateEvent: KysoUsersCreateEvent) {
         const activityFeed: ActivityFeed = new ActivityFeed()
         activityFeed.user_id = kysoUsersCreateEvent.user.id
@@ -27,7 +27,7 @@ export class UsersController {
         this.databaseService.insertActivityFeed(activityFeed)
     }
 
-    @EventPattern(KysoEvent.USERS_UPDATE)
+    @EventPattern(KysoEventEnum.USERS_UPDATE)
     async handleUsersUpdated(kysoUsersUpdateEvent: KysoUsersUpdateEvent) {
         const activityFeed: ActivityFeed = new ActivityFeed()
         activityFeed.user_id = kysoUsersUpdateEvent.owner.id
@@ -37,7 +37,7 @@ export class UsersController {
         this.databaseService.insertActivityFeed(activityFeed)
     }
 
-    @EventPattern(KysoEvent.USERS_DELETE)
+    @EventPattern(KysoEventEnum.USERS_DELETE)
     async handleUsersDeleted(kysoUsersDeleteEvent: KysoUsersDeleteEvent) {
         const activityFeed: ActivityFeed = new ActivityFeed()
         activityFeed.user_id = kysoUsersDeleteEvent.owner.id
@@ -47,7 +47,7 @@ export class UsersController {
         this.databaseService.insertActivityFeed(activityFeed)
     }
 
-    @EventPattern(KysoEvent.USERS_VERIFICATION_EMAIL)
+    @EventPattern(KysoEventEnum.USERS_VERIFICATION_EMAIL)
     async handleUsersVerificationEmail(kysoUsersVerificationEmailEvent: KysoUsersVerificationEmailEvent) {
         const activityFeed: ActivityFeed = new ActivityFeed()
         activityFeed.user_id = kysoUsersVerificationEmailEvent.user.id
@@ -57,7 +57,7 @@ export class UsersController {
         this.databaseService.insertActivityFeed(activityFeed)
     }
 
-    @EventPattern(KysoEvent.USERS_RECOVERY_PASSWORD)
+    @EventPattern(KysoEventEnum.USERS_RECOVERY_PASSWORD)
     async handleUsersRecoveryPassword(kysoUsersRecoveryPasswordEvent: KysoUsersRecoveryPasswordEvent) {
         const activityFeed: ActivityFeed = new ActivityFeed()
         activityFeed.user_id = kysoUsersRecoveryPasswordEvent.user.id

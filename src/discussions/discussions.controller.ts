@@ -6,7 +6,7 @@ import {
     KysoDiscussionsDeleteEvent,
     KysoDiscussionsNewMentionEvent,
     KysoDiscussionsUpdateEvent,
-    KysoEvent,
+    KysoEventEnum,
 } from '@kyso-io/kyso-model'
 import { EntityEnum } from '@kyso-io/kyso-model/dist/enums/entity.enum'
 import { Controller } from '@nestjs/common'
@@ -17,7 +17,7 @@ import { DatabaseService } from '../database/database.service'
 export class DiscussionsController {
     constructor(private databaseService: DatabaseService) {}
 
-    @EventPattern(KysoEvent.DISCUSSIONS_CREATE)
+    @EventPattern(KysoEventEnum.DISCUSSIONS_CREATE)
     async handleDiscussionsCreated(kysoDiscussionsCreateEvent: KysoDiscussionsCreateEvent) {
         const activityFeed: ActivityFeed = new ActivityFeed()
         activityFeed.user_id = kysoDiscussionsCreateEvent.user.id
@@ -29,7 +29,7 @@ export class DiscussionsController {
         this.databaseService.insertActivityFeed(activityFeed)
     }
 
-    @EventPattern(KysoEvent.DISCUSSIONS_UPDATE)
+    @EventPattern(KysoEventEnum.DISCUSSIONS_UPDATE)
     async handleDiscussionsUpdated(kysoDiscussionsUpdateEvent: KysoDiscussionsUpdateEvent) {
         const activityFeed: ActivityFeed = new ActivityFeed()
         activityFeed.user_id = kysoDiscussionsUpdateEvent.user.id
@@ -41,7 +41,7 @@ export class DiscussionsController {
         this.databaseService.insertActivityFeed(activityFeed)
     }
 
-    @EventPattern(KysoEvent.DISCUSSIONS_DELETE)
+    @EventPattern(KysoEventEnum.DISCUSSIONS_DELETE)
     async handleDiscussionsDeleted(kysoDiscussionsDeleteEvent: KysoDiscussionsDeleteEvent) {
         const activityFeed: ActivityFeed = new ActivityFeed()
         activityFeed.user_id = kysoDiscussionsDeleteEvent.user.id
@@ -53,7 +53,7 @@ export class DiscussionsController {
         this.databaseService.insertActivityFeed(activityFeed)
     }
 
-    @EventPattern(KysoEvent.DISCUSSIONS_NEW_ASSIGNEE)
+    @EventPattern(KysoEventEnum.DISCUSSIONS_NEW_ASSIGNEE)
     async handleDiscussionsNewAssignee(kysoDiscussionsAssigneeEvent: KysoDiscussionsAssigneeEvent) {
         const activityFeed: ActivityFeed = new ActivityFeed()
         activityFeed.user_id = kysoDiscussionsAssigneeEvent.assigneeUser.id
@@ -65,7 +65,7 @@ export class DiscussionsController {
         this.databaseService.insertActivityFeed(activityFeed)
     }
 
-    @EventPattern(KysoEvent.DISCUSSIONS_REMOVE_ASSIGNEE)
+    @EventPattern(KysoEventEnum.DISCUSSIONS_REMOVE_ASSIGNEE)
     async handleDiscussionsRemoveAssignee(kysoDiscussionsAssigneeEvent: KysoDiscussionsAssigneeEvent) {
         const activityFeed: ActivityFeed = new ActivityFeed()
         activityFeed.user_id = kysoDiscussionsAssigneeEvent.assigneeUser.id
@@ -77,7 +77,7 @@ export class DiscussionsController {
         this.databaseService.insertActivityFeed(activityFeed)
     }
 
-    @EventPattern(KysoEvent.DISCUSSIONS_NEW_MENTION)
+    @EventPattern(KysoEventEnum.DISCUSSIONS_NEW_MENTION)
     async handleDiscussionsNewMention(kysoDiscussionsNewMentionEvent: KysoDiscussionsNewMentionEvent) {
         const activityFeed: ActivityFeed = new ActivityFeed()
         activityFeed.user_id = kysoDiscussionsNewMentionEvent.user.id
