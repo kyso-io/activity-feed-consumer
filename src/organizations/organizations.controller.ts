@@ -2,7 +2,7 @@ import {
     ActionEnum,
     ActivityFeed,
     EntityEnum,
-    KysoEvent,
+    KysoEventEnum,
     KysoOrganizationsAddMemberEvent,
     KysoOrganizationsCreateEvent,
     KysoOrganizationsDeleteEvent,
@@ -18,7 +18,7 @@ import { DatabaseService } from '../database/database.service'
 export class OrganizationsController {
     constructor(private databaseService: DatabaseService) {}
 
-    @EventPattern(KysoEvent.ORGANIZATIONS_CREATE)
+    @EventPattern(KysoEventEnum.ORGANIZATIONS_CREATE)
     async handleTeamsCreated(kysoOrganizationsCreateEvent: KysoOrganizationsCreateEvent) {
         const activityFeed: ActivityFeed = new ActivityFeed()
         activityFeed.user_id = kysoOrganizationsCreateEvent.user.id
@@ -29,7 +29,7 @@ export class OrganizationsController {
         this.databaseService.insertActivityFeed(activityFeed)
     }
 
-    @EventPattern(KysoEvent.ORGANIZATIONS_UPDATE)
+    @EventPattern(KysoEventEnum.ORGANIZATIONS_UPDATE)
     async handleOrganizationsUpdated(kysoOrganizationsUpdateEvent: KysoOrganizationsUpdateEvent) {
         const activityFeed: ActivityFeed = new ActivityFeed()
         activityFeed.user_id = kysoOrganizationsUpdateEvent.user.id
@@ -40,7 +40,7 @@ export class OrganizationsController {
         this.databaseService.insertActivityFeed(activityFeed)
     }
 
-    @EventPattern(KysoEvent.ORGANIZATIONS_DELETE)
+    @EventPattern(KysoEventEnum.ORGANIZATIONS_DELETE)
     async handleOrganizationsDeleted(kysoOrganizationsDeleteEvent: KysoOrganizationsDeleteEvent) {
         const activityFeed: ActivityFeed = new ActivityFeed()
         activityFeed.user_id = kysoOrganizationsDeleteEvent.user.id
@@ -51,7 +51,7 @@ export class OrganizationsController {
         this.databaseService.insertActivityFeed(activityFeed)
     }
 
-    @EventPattern(KysoEvent.ORGANIZATIONS_ADD_MEMBER)
+    @EventPattern(KysoEventEnum.ORGANIZATIONS_ADD_MEMBER)
     async handleOrganizationsAddMember(kysoOrganizationsAddMemberEvent: KysoOrganizationsAddMemberEvent) {
         const activityFeed: ActivityFeed = new ActivityFeed()
         activityFeed.user_id = kysoOrganizationsAddMemberEvent.user.id
@@ -62,7 +62,7 @@ export class OrganizationsController {
         this.databaseService.insertActivityFeed(activityFeed)
     }
 
-    @EventPattern(KysoEvent.ORGANIZATIONS_UPDATE_MEMBER_ROLE)
+    @EventPattern(KysoEventEnum.ORGANIZATIONS_UPDATE_MEMBER_ROLE)
     async handleOrganizationsUpdateMemberRole(kysoOrganizationsUpdateMemberRoleEvent: KysoOrganizationsUpdateMemberRoleEvent) {
         const activityFeed: ActivityFeed = new ActivityFeed()
         activityFeed.user_id = kysoOrganizationsUpdateMemberRoleEvent.user.id
@@ -73,7 +73,7 @@ export class OrganizationsController {
         this.databaseService.insertActivityFeed(activityFeed)
     }
 
-    @EventPattern(KysoEvent.ORGANIZATIONS_REMOVE_MEMBER)
+    @EventPattern(KysoEventEnum.ORGANIZATIONS_REMOVE_MEMBER)
     async handleOrganizationsRemoveMember(kysoOrganizationsRemoveMemberEvent: KysoOrganizationsRemoveMemberEvent) {
         const activityFeed: ActivityFeed = new ActivityFeed()
         activityFeed.user_id = kysoOrganizationsRemoveMemberEvent.user.id

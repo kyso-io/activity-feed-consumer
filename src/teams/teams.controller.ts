@@ -2,7 +2,7 @@ import {
     ActionEnum,
     ActivityFeed,
     EntityEnum,
-    KysoEvent,
+    KysoEventEnum,
     KysoTeamsAddMemberEvent,
     KysoTeamsCreateEvent,
     KysoTeamsDeleteEvent,
@@ -18,7 +18,7 @@ import { DatabaseService } from '../database/database.service'
 export class TeamsController {
     constructor(private databaseService: DatabaseService) {}
 
-    @EventPattern(KysoEvent.TEAMS_CREATE)
+    @EventPattern(KysoEventEnum.TEAMS_CREATE)
     async handleTeamsCreated(kysoTeamsCreateEvent: KysoTeamsCreateEvent) {
         const activityFeed: ActivityFeed = new ActivityFeed()
         activityFeed.user_id = kysoTeamsCreateEvent.user.id
@@ -30,7 +30,7 @@ export class TeamsController {
         this.databaseService.insertActivityFeed(activityFeed)
     }
 
-    @EventPattern(KysoEvent.TEAMS_UPDATE)
+    @EventPattern(KysoEventEnum.TEAMS_UPDATE)
     async handleTeamsUpdated(kysoTeamsUpdateEvent: KysoTeamsUpdateEvent) {
         const activityFeed: ActivityFeed = new ActivityFeed()
         activityFeed.user_id = kysoTeamsUpdateEvent.user.id
@@ -42,7 +42,7 @@ export class TeamsController {
         this.databaseService.insertActivityFeed(activityFeed)
     }
 
-    @EventPattern(KysoEvent.TEAMS_DELETE)
+    @EventPattern(KysoEventEnum.TEAMS_DELETE)
     async handleTeamsDeleted(kysoTeamsDeleteEvent: KysoTeamsDeleteEvent) {
         const activityFeed: ActivityFeed = new ActivityFeed()
         activityFeed.user_id = kysoTeamsDeleteEvent.user.id
@@ -54,7 +54,7 @@ export class TeamsController {
         this.databaseService.insertActivityFeed(activityFeed)
     }
 
-    @EventPattern(KysoEvent.TEAMS_ADD_MEMBER)
+    @EventPattern(KysoEventEnum.TEAMS_ADD_MEMBER)
     async handleTeamsAddMember(kysoTeamsAddMemberEvent: KysoTeamsAddMemberEvent) {
         const activityFeed: ActivityFeed = new ActivityFeed()
         activityFeed.user_id = kysoTeamsAddMemberEvent.user.id
@@ -66,7 +66,7 @@ export class TeamsController {
         this.databaseService.insertActivityFeed(activityFeed)
     }
 
-    @EventPattern(KysoEvent.TEAMS_UPDATE_MEMBER_ROLES)
+    @EventPattern(KysoEventEnum.TEAMS_UPDATE_MEMBER_ROLES)
     async handleTeamsUpdateMemberRoles(kysoTeamsUpdateMemberRolesEvent: KysoTeamsUpdateMemberRolesEvent) {
         const activityFeed: ActivityFeed = new ActivityFeed()
         activityFeed.user_id = kysoTeamsUpdateMemberRolesEvent.user.id
@@ -78,7 +78,7 @@ export class TeamsController {
         this.databaseService.insertActivityFeed(activityFeed)
     }
 
-    @EventPattern(KysoEvent.TEAMS_REMOVE_MEMBER)
+    @EventPattern(KysoEventEnum.TEAMS_REMOVE_MEMBER)
     async handleTeamsRemoveMember(kysoTeamsRemoveMemberEvent: KysoTeamsRemoveMemberEvent) {
         const activityFeed: ActivityFeed = new ActivityFeed()
         activityFeed.user_id = kysoTeamsRemoveMemberEvent.user.id

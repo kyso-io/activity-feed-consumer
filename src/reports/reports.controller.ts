@@ -2,7 +2,7 @@ import {
     ActionEnum,
     ActivityFeed,
     EntityEnum,
-    KysoEvent,
+    KysoEventEnum,
     KysoReportsAuthorEvent,
     KysoReportsCreateEvent,
     KysoReportsDeleteEvent,
@@ -19,7 +19,7 @@ import { DatabaseService } from '../database/database.service'
 export class ReportsController {
     constructor(private databaseService: DatabaseService) {}
 
-    @EventPattern(KysoEvent.REPORTS_CREATE)
+    @EventPattern(KysoEventEnum.REPORTS_CREATE)
     async handleReportsCreate(kysoReportsCreateEvent: KysoReportsCreateEvent) {
         const activityFeed: ActivityFeed = new ActivityFeed()
         activityFeed.user_id = kysoReportsCreateEvent.user.id
@@ -31,7 +31,7 @@ export class ReportsController {
         this.databaseService.insertActivityFeed(activityFeed)
     }
 
-    @EventPattern(KysoEvent.REPORTS_UPDATE)
+    @EventPattern(KysoEventEnum.REPORTS_UPDATE)
     async handleReportsUpdate(kysoReportsUpdateEvent: KysoReportsUpdateEvent) {
         const activityFeed: ActivityFeed = new ActivityFeed()
         activityFeed.user_id = kysoReportsUpdateEvent.user.id
@@ -43,7 +43,7 @@ export class ReportsController {
         this.databaseService.insertActivityFeed(activityFeed)
     }
 
-    @EventPattern(KysoEvent.REPORTS_NEW_VERSION)
+    @EventPattern(KysoEventEnum.REPORTS_NEW_VERSION)
     async handleReportsNewVersion(kysoReportsNewVersionEvent: KysoReportsNewVersionEvent) {
         const activityFeed: ActivityFeed = new ActivityFeed()
         activityFeed.user_id = kysoReportsNewVersionEvent.user.id
@@ -55,7 +55,7 @@ export class ReportsController {
         this.databaseService.insertActivityFeed(activityFeed)
     }
 
-    @EventPattern(KysoEvent.REPORTS_DELETE)
+    @EventPattern(KysoEventEnum.REPORTS_DELETE)
     async handleReportsDelete(kysoReportsDeleteEvent: KysoReportsDeleteEvent) {
         const activityFeed: ActivityFeed = new ActivityFeed()
         activityFeed.user_id = kysoReportsDeleteEvent.user.id
@@ -67,7 +67,7 @@ export class ReportsController {
         this.databaseService.insertActivityFeed(activityFeed)
     }
 
-    @EventPattern(KysoEvent.REPORTS_PIN)
+    @EventPattern(KysoEventEnum.REPORTS_PIN)
     async handleReportsPin(kysoReportsPinEvent: KysoReportsPinEvent) {
         const activityFeed: ActivityFeed = new ActivityFeed()
         activityFeed.user_id = kysoReportsPinEvent.user.id
@@ -79,7 +79,7 @@ export class ReportsController {
         this.databaseService.insertActivityFeed(activityFeed)
     }
 
-    @EventPattern(KysoEvent.REPORTS_UNPIN)
+    @EventPattern(KysoEventEnum.REPORTS_UNPIN)
     async handleReportsUnpin(kysoReportsUnpinEvent: KysoReportsPinEvent) {
         const activityFeed: ActivityFeed = new ActivityFeed()
         activityFeed.user_id = kysoReportsUnpinEvent.user.id
@@ -91,7 +91,7 @@ export class ReportsController {
         this.databaseService.insertActivityFeed(activityFeed)
     }
 
-    @EventPattern(KysoEvent.REPORTS_PIN_GLOBAL)
+    @EventPattern(KysoEventEnum.REPORTS_PIN_GLOBAL)
     async handleReportsPinGlobal(kysoReportsPinGlobalEvent: KysoReportsPinEvent) {
         const activityFeed: ActivityFeed = new ActivityFeed()
         activityFeed.user_id = kysoReportsPinGlobalEvent.user.id
@@ -103,7 +103,7 @@ export class ReportsController {
         this.databaseService.insertActivityFeed(activityFeed)
     }
 
-    @EventPattern(KysoEvent.REPORTS_UNPIN_GLOBAL)
+    @EventPattern(KysoEventEnum.REPORTS_UNPIN_GLOBAL)
     async handleReportsUnpinGlobal(kysoReportsUnpinGlobalEvent: KysoReportsPinEvent) {
         const activityFeed: ActivityFeed = new ActivityFeed()
         activityFeed.user_id = kysoReportsUnpinGlobalEvent.user.id
@@ -115,7 +115,7 @@ export class ReportsController {
         this.databaseService.insertActivityFeed(activityFeed)
     }
 
-    @EventPattern(KysoEvent.REPORTS_STAR)
+    @EventPattern(KysoEventEnum.REPORTS_STAR)
     async handleReportsStar(kysoReportsStarEvent: KysoReportsStarEvent) {
         const activityFeed: ActivityFeed = new ActivityFeed()
         activityFeed.user_id = kysoReportsStarEvent.user.id
@@ -127,7 +127,7 @@ export class ReportsController {
         this.databaseService.insertActivityFeed(activityFeed)
     }
 
-    @EventPattern(KysoEvent.REPORTS_UNSTAR)
+    @EventPattern(KysoEventEnum.REPORTS_UNSTAR)
     async handleReportsUnstar(kysoReportsUnstarEvent: KysoReportsStarEvent) {
         const activityFeed: ActivityFeed = new ActivityFeed()
         activityFeed.user_id = kysoReportsUnstarEvent.user.id
@@ -139,7 +139,7 @@ export class ReportsController {
         this.databaseService.insertActivityFeed(activityFeed)
     }
 
-    @EventPattern(KysoEvent.REPORTS_ADD_AUTHOR)
+    @EventPattern(KysoEventEnum.REPORTS_ADD_AUTHOR)
     async handleReportsAddAuthor(kysoReportsAuthorEvent: KysoReportsAuthorEvent) {
         const activityFeed: ActivityFeed = new ActivityFeed()
         activityFeed.user_id = kysoReportsAuthorEvent.author.id
