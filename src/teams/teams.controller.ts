@@ -44,14 +44,14 @@ export class TeamsController {
 
     @EventPattern(KysoEventEnum.TEAMS_DELETE)
     async handleTeamsDeleted(kysoTeamsDeleteEvent: KysoTeamsDeleteEvent) {
-        const activityFeed: ActivityFeed = new ActivityFeed()
-        activityFeed.user_id = kysoTeamsDeleteEvent.user.id
-        activityFeed.entity = EntityEnum.TEAM
-        activityFeed.entity_id = kysoTeamsDeleteEvent.team.id
-        activityFeed.action = ActionEnum.DELETE
-        activityFeed.organization = kysoTeamsDeleteEvent.organization.sluglified_name
-        activityFeed.team = kysoTeamsDeleteEvent.team.sluglified_name
-        this.databaseService.insertActivityFeed(activityFeed)
+        // const activityFeed: ActivityFeed = new ActivityFeed()
+        // activityFeed.user_id = kysoTeamsDeleteEvent.user.id
+        // activityFeed.entity = EntityEnum.TEAM
+        // activityFeed.entity_id = kysoTeamsDeleteEvent.team.id
+        // activityFeed.action = ActionEnum.DELETE
+        // activityFeed.organization = kysoTeamsDeleteEvent.organization.sluglified_name
+        // activityFeed.team = kysoTeamsDeleteEvent.team.sluglified_name
+        // this.databaseService.insertActivityFeed(activityFeed)
     }
 
     @EventPattern(KysoEventEnum.TEAMS_ADD_MEMBER)
