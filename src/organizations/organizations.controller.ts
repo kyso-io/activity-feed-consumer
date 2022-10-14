@@ -42,13 +42,13 @@ export class OrganizationsController {
 
     @EventPattern(KysoEventEnum.ORGANIZATIONS_DELETE)
     async handleOrganizationsDeleted(kysoOrganizationsDeleteEvent: KysoOrganizationsDeleteEvent) {
-        const activityFeed: ActivityFeed = new ActivityFeed()
-        activityFeed.user_id = kysoOrganizationsDeleteEvent.user.id
-        activityFeed.entity = EntityEnum.ORGANIZATION
-        activityFeed.entity_id = kysoOrganizationsDeleteEvent.organization.id
-        activityFeed.action = ActionEnum.DELETE
-        activityFeed.organization = kysoOrganizationsDeleteEvent.organization.sluglified_name
-        this.databaseService.insertActivityFeed(activityFeed)
+        // const activityFeed: ActivityFeed = new ActivityFeed()
+        // activityFeed.user_id = kysoOrganizationsDeleteEvent.user.id
+        // activityFeed.entity = EntityEnum.ORGANIZATION
+        // activityFeed.entity_id = kysoOrganizationsDeleteEvent.organization.id
+        // activityFeed.action = ActionEnum.DELETE
+        // activityFeed.organization = kysoOrganizationsDeleteEvent.organization.sluglified_name
+        // this.databaseService.insertActivityFeed(activityFeed)
     }
 
     @EventPattern(KysoEventEnum.ORGANIZATIONS_ADD_MEMBER)
