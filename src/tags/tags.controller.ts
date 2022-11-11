@@ -9,11 +9,7 @@ export class TagsController {
 
     @EventPattern(KysoEventEnum.TAGS_CREATE)
     async handleTeamsCreated(kysoTagsEvent: KysoTagsEvent) {
-        const activityFeed: ActivityFeed = new ActivityFeed()
-        activityFeed.user_id = kysoTagsEvent.user.id
-        activityFeed.entity = EntityEnum.TAG
-        activityFeed.entity_id = kysoTagsEvent.tag.id
-        activityFeed.action = ActionEnum.CREATE
+        const activityFeed: ActivityFeed = new ActivityFeed(kysoTagsEvent.user.id, null, null, EntityEnum.TAG, kysoTagsEvent.tag.id, ActionEnum.CREATE, false, [])
         this.databaseService.insertActivityFeed(activityFeed)
     }
 }
