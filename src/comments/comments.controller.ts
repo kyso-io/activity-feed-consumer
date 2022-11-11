@@ -9,37 +9,46 @@ export class CommentsController {
 
     @EventPattern(KysoEventEnum.COMMENTS_CREATE)
     async handleCommentsCreated(kysoCommentsCreateEvent: KysoCommentsCreateEvent) {
-        const activityFeed: ActivityFeed = new ActivityFeed()
-        activityFeed.user_id = kysoCommentsCreateEvent.user.id
-        activityFeed.entity = EntityEnum.COMMENT
-        activityFeed.entity_id = kysoCommentsCreateEvent.comment.id
-        activityFeed.action = ActionEnum.CREATE
-        activityFeed.organization = kysoCommentsCreateEvent.organization.sluglified_name
-        activityFeed.team = kysoCommentsCreateEvent.team.sluglified_name
+        const activityFeed: ActivityFeed = new ActivityFeed(
+            kysoCommentsCreateEvent.user.id,
+            kysoCommentsCreateEvent.organization.sluglified_name,
+            kysoCommentsCreateEvent.team.sluglified_name,
+            EntityEnum.COMMENT,
+            kysoCommentsCreateEvent.comment.id,
+            ActionEnum.CREATE,
+            false,
+            [],
+        )
         this.databaseService.insertActivityFeed(activityFeed)
     }
 
     @EventPattern(KysoEventEnum.COMMENTS_UPDATE)
     async handleCommentsUpdated(kysoCommentsUpdateEvent: KysoCommentsUpdateEvent) {
-        const activityFeed: ActivityFeed = new ActivityFeed()
-        activityFeed.user_id = kysoCommentsUpdateEvent.user.id
-        activityFeed.entity = EntityEnum.COMMENT
-        activityFeed.entity_id = kysoCommentsUpdateEvent.comment.id
-        activityFeed.action = ActionEnum.UPDATE
-        activityFeed.organization = kysoCommentsUpdateEvent.organization.sluglified_name
-        activityFeed.team = kysoCommentsUpdateEvent.team.sluglified_name
+        const activityFeed: ActivityFeed = new ActivityFeed(
+            kysoCommentsUpdateEvent.user.id,
+            kysoCommentsUpdateEvent.organization.sluglified_name,
+            kysoCommentsUpdateEvent.team.sluglified_name,
+            EntityEnum.COMMENT,
+            kysoCommentsUpdateEvent.comment.id,
+            ActionEnum.UPDATE,
+            false,
+            [],
+        )
         this.databaseService.insertActivityFeed(activityFeed)
     }
 
     @EventPattern(KysoEventEnum.COMMENTS_DELETE)
     async handleCommentsDeleted(kysoCommentsDeleteEvent: KysoCommentsDeleteEvent) {
-        const activityFeed: ActivityFeed = new ActivityFeed()
-        activityFeed.user_id = kysoCommentsDeleteEvent.user.id
-        activityFeed.entity = EntityEnum.COMMENT
-        activityFeed.entity_id = kysoCommentsDeleteEvent.comment.id
-        activityFeed.action = ActionEnum.DELETE
-        activityFeed.organization = kysoCommentsDeleteEvent.organization.sluglified_name
-        activityFeed.team = kysoCommentsDeleteEvent.team.sluglified_name
+        const activityFeed: ActivityFeed = new ActivityFeed(
+            kysoCommentsDeleteEvent.user.id,
+            kysoCommentsDeleteEvent.organization.sluglified_name,
+            kysoCommentsDeleteEvent.team.sluglified_name,
+            EntityEnum.COMMENT,
+            kysoCommentsDeleteEvent.comment.id,
+            ActionEnum.DELETE,
+            false,
+            [],
+        )
         this.databaseService.insertActivityFeed(activityFeed)
     }
 }
