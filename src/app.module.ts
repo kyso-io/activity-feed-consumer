@@ -5,6 +5,7 @@ import { AppService } from './app.service'
 import { CommentsModule } from './comments/comments.module'
 import { DatabaseModule } from './database/database.module'
 import { DiscussionsModule } from './discussions/discussions.module'
+import { InlineCommentsModule } from './inline-comments/inline-comments.module'
 import { OrganizationsModule } from './organizations/organizations.module'
 import { ReportsModule } from './reports/reports.module'
 import { TagsModule } from './tags/tags.module'
@@ -25,6 +26,7 @@ if (process.env.DOTENV_FILE) {
         }),
         DatabaseModule,
         DiscussionsModule,
+        InlineCommentsModule,
         OrganizationsModule,
         ReportsModule,
         TagsModule,
