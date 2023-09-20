@@ -66,7 +66,7 @@ export class OrganizationsController {
     @EventPattern(KysoEventEnum.ORGANIZATIONS_ADD_MEMBER)
     async handleOrganizationsAddMember(kysoOrganizationsAddMemberEvent: KysoOrganizationsAddMemberEvent) {
         const activityFeed: ActivityFeed = new ActivityFeed(
-            kysoOrganizationsAddMemberEvent.user.id,
+            kysoOrganizationsAddMemberEvent.userCreatingAction.id,
             kysoOrganizationsAddMemberEvent.organization.sluglified_name,
             null,
             EntityEnum.ORGANIZATION,

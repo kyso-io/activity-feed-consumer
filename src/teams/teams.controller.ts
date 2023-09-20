@@ -66,7 +66,7 @@ export class TeamsController {
     @EventPattern(KysoEventEnum.TEAMS_ADD_MEMBER)
     async handleTeamsAddMember(kysoTeamsAddMemberEvent: KysoTeamsAddMemberEvent) {
         const activityFeed: ActivityFeed = new ActivityFeed(
-            kysoTeamsAddMemberEvent.user.id,
+            kysoTeamsAddMemberEvent.userCreatingAction.id,
             kysoTeamsAddMemberEvent.organization.sluglified_name,
             kysoTeamsAddMemberEvent.team.sluglified_name,
             EntityEnum.TEAM,
@@ -81,7 +81,7 @@ export class TeamsController {
     @EventPattern(KysoEventEnum.TEAMS_UPDATE_MEMBER_ROLES)
     async handleTeamsUpdateMemberRoles(kysoTeamsUpdateMemberRolesEvent: KysoTeamsUpdateMemberRolesEvent) {
         const activityFeed: ActivityFeed = new ActivityFeed(
-            kysoTeamsUpdateMemberRolesEvent.user.id,
+            kysoTeamsUpdateMemberRolesEvent.userCreatingAction.id,
             kysoTeamsUpdateMemberRolesEvent.organization.sluglified_name,
             kysoTeamsUpdateMemberRolesEvent.team.sluglified_name,
             EntityEnum.TEAM,
